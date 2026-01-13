@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -e
+
+# Install Node.js if not present
+curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+apt-get install -y nodejs
+
+# Configure npm for user-level installs (avoid permission issues)
+mkdir -p ~/.npm-global
+npm config set prefix ~/.npm-global
+export PATH=$HOME/.npm-global/bin:$PATH
+
+# Install Claude Code
+npm install -g @anthropic-ai/claude-code
