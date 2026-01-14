@@ -12,3 +12,4 @@ export PATH=$HOME/.npm-global/bin:$PATH
 
 # Install Claude Code
 npm install -g @anthropic-ai/claude-code
+
