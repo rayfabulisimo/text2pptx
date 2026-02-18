@@ -1,4 +1,4 @@
-# hash:sha256:5180c9b99e99f80ee1684d4cc3fc5cbda85125c9734558f22fdc66e6f9a3a9a5
+# hash:sha256:12d7410853ab1572d891295fe960e1db8f33bb812a6f6f3aeb1244f8607e5e85
 ARG REGISTRY_HOST
 FROM $REGISTRY_HOST/codeocean/miniconda3:25.3.0-3-python3.12.10-ubuntu22.04
 
@@ -27,7 +27,8 @@ RUN cd /.code-server \
     && ln -s /.code-server/code-server-4.100.3-linux-amd64/bin/code-server /usr/bin/code-server \
     && mkdir -p /.vscode/extensions
 
-RUN code-server --extensions-dir="/.vscode/extensions" --install-extension ms-python.python@2025.14.0 \
+RUN code-server --extensions-dir="/.vscode/extensions" --install-extension anthropic.claude-code@2.1.7 \
+    && code-server --extensions-dir="/.vscode/extensions" --install-extension ms-python.python@2025.14.0 \
     && code-server --extensions-dir="/.vscode/extensions" --install-extension ms-toolsai.jupyter@2025.4.1 \
     && code-server --extensions-dir="/.vscode/extensions" --install-extension reditorsupport.r@2.8.6 \
     && code-server --extensions-dir="/.vscode/extensions" --install-extension saoudrizwan.claude-dev@3.35.1
