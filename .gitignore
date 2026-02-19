@@ -1,3 +1,31 @@
-/data/
+# API Keys and Secrets
+.env
 
-.vscode
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# Output files
+*.pptx
+*.json
+test_*
+output/
+*_presentation/
+*_summary.txt
+*_mappings.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
