@@ -19,8 +19,12 @@ RUN apt-get update \
         apt-transport-https \
         curl \
         nodejs \
+        npm \
         poppler-utils \
     && rm -rf /var/lib/apt/lists/*
+
+# Install Claude Code CLI
+RUN npm install -g @anthropic-ai/claude-code
 
 ADD "https://github.com/coder/code-server/releases/download/v4.100.3/code-server-4.100.3-linux-amd64.tar.gz" /.code-server/code-server.tar.gz
 	
