@@ -1,4 +1,4 @@
-# hash:sha256:12d7410853ab1572d891295fe960e1db8f33bb812a6f6f3aeb1244f8607e5e85
+# hash:sha256:e05ef360ddb9465cd2464d6aac0bd1fe4fc330cef4eefcb91812e20201d32158
 ARG REGISTRY_HOST
 FROM $REGISTRY_HOST/codeocean/miniconda3:25.3.0-3-python3.12.10-ubuntu22.04
 
@@ -16,7 +16,10 @@ ENV MAX_THINKING_TOKENS=1024
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        curl=7.81.0-1ubuntu1.21 \
+        apt-transport-https \
+        curl \
+        nodejs \
+        poppler-utils \
     && rm -rf /var/lib/apt/lists/*
 
 ADD "https://github.com/coder/code-server/releases/download/v4.100.3/code-server-4.100.3-linux-amd64.tar.gz" /.code-server/code-server.tar.gz

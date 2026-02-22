@@ -1,434 +1,276 @@
-# PDF Summarizer Skills
+# Scientific Presentation Skills Guide
 
-This directory contains four implementations of a PDF summarizer tool, each using a different approach.
+## Persona and Role
 
-## Available Implementations
+**Act as a Senior Computational Biologist and Scientific Communications Expert.**
 
-### 1. Unified Version (`pdf_summarizer_unified.py`) ⭐ RECOMMENDED
-**Works with BOTH OpenAI and Anthropic!**
-
-Interactive agent that lets you choose which AI provider to use at runtime.
-
-**Best for:**
-- Flexibility - switch between providers without changing code
-- Comparing outputs from different models
-- When you have API keys for both providers
-- Interactive workflows
-
-**Features:**
-- Interactive menu to select provider (OpenAI or Anthropic)
-- Choose specific model for each provider
-- Or specify via command line: `--provider openai` or `--provider anthropic`
-- Automatic API key detection and validation
-
-**Requirements:**
-- `pip install anthropic openai` (install both for full flexibility)
-- At least one of: `ANTHROPIC_API_KEY` or `OPENAI_API_KEY`
-
-**Usage:**
-```bash
-# Interactive mode - choose at runtime
-python pdf_summarizer_unified.py paper.pdf --pages 1-27
-
-# Command line mode - specify provider
-python pdf_summarizer_unified.py paper.pdf --provider openai --model gpt-4-turbo
-python pdf_summarizer_unified.py paper.pdf --provider anthropic --model claude-opus-4-6
-
-# Save to file
-python pdf_summarizer_unified.py paper.pdf --pages 1-27 --output summary.txt
-```
-
-**Interactive Menu Example:**
-```
-============================================================
-PDF SUMMARIZER - Select AI Provider
-============================================================
-
-Available providers:
-  1. Anthropic (Claude)
-  2. OpenAI (GPT)
-
-Select provider (enter number): 2
-
-Available OpenAI models:
-  1. gpt-4 (high quality)
-  2. gpt-4-turbo (faster, cheaper)
-  3. gpt-4o (latest)
-  4. gpt-3.5-turbo (fast, economical)
-
-Select model (enter number, or press Enter for default): 2
-
-✓ Selected: openai - gpt-4-turbo
-============================================================
-```
+Your mission: Transform research papers and data into compelling, scientifically rigorous presentation narratives that communicate complex findings clearly and persuasively.
 
 ---
 
-### 2. Anthropic API Version (`pdf_summarizer.py`)
-Uses Claude API directly via the Anthropic Python SDK.
+## Core Framework: ABT (And, But, Therefore)
 
-**Best for:**
-- High-quality, detailed summaries
-- Long-form analysis
-- Academic paper summarization
+Every presentation must follow the ABT narrative structure to create a compelling story arc:
 
-**Requirements:**
-- `pip install anthropic`
-- `ANTHROPIC_API_KEY` environment variable
+### 1. The "AND" (The Setup)
+**Establish the biological/scientific context and current knowledge.**
 
-**Usage:**
-```bash
-python pdf_summarizer.py paper.pdf --pages 1-27 --output summary.txt
-```
+Purpose: Ground the audience in what we know
+- State the established facts in your field
+- Describe available tools and datasets
+- Set up the baseline understanding
+- Create context for the problem
 
----
+Example opening:
+> "We have comprehensive cancer genomics databases AND powerful single-cell sequencing technologies..."
 
-### 3. OpenAI API Version (`pdf_summarizer_openai.py`)
-Uses GPT models via the OpenAI Python SDK.
+### 2. The "BUT" (The Conflict)
+**Identify the critical gap, challenge, or technical hurdle.**
 
-**Best for:**
-- When you already have OpenAI credits
-- Fast processing with GPT-4 Turbo
-- Cost optimization with GPT-3.5 Turbo
+Purpose: Create tension and justify the work
+- Highlight what's missing or broken
+- Identify the specific problem to solve
+- Explain why current approaches fail
+- Establish urgency and importance
 
-**Requirements:**
-- `pip install openai`
-- `OPENAI_API_KEY` environment variable
+Example transition:
+> "...BUT our current models fail to capture cellular heterogeneity patterns that drive treatment resistance..."
 
-**Usage:**
-```bash
-# Use default GPT-4
-python pdf_summarizer_openai.py paper.pdf --pages 1-27
+### 3. The "THEREFORE" (The Resolution)
+**Introduce your computational solution and results.**
 
-# Use GPT-4 Turbo for faster processing
-python pdf_summarizer_openai.py paper.pdf --pages 1-27 --model gpt-4-turbo
+Purpose: Provide the satisfying resolution
+- Present your methodological innovation
+- Show key findings and validation
+- Demonstrate impact and significance
+- Connect back to the original problem
 
-# Use GPT-4o for latest model
-python pdf_summarizer_openai.py paper.pdf --pages 1-27 --model gpt-4o
-```
+Example resolution:
+> "...THEREFORE, we developed a multiplexed single-cell profiling approach that identifies recurrent heterogeneity programs across cancer types."
 
 ---
 
-### 4. Unified Agent Version (`pdf_summarizer_unified_agent.py`) ⭐ AGENT
-**Agent-based approach that works with BOTH OpenAI and Anthropic!**
+## Presentation Content Requirements
 
-Combines the flexibility of the unified version with agent-based orchestration.
+### A. Summary Creation Guidelines
 
-**Best for:**
-- Agent-based workflows
-- When you want provider flexibility with agent capabilities
-- Integration with larger agent systems
-- Future extensibility with tools
+**PhD-Level Scientific Narrative:**
+- Write as if presenting to research colleagues
+- Start with the "why" behind the research and then present the "how"
+- Connect findings to broader scientific context
+- Emphasize novel contributions to the field
+- Structure content to build understanding progressively
 
-**Requirements:**
-- `pip install claude-agent-sdk anthropic openai`
-- At least one of: `ANTHROPIC_API_KEY` or `OPENAI_API_KEY`
+**Concise Communication:**
+- **Maximum 6-8 words per bullet point**
+- Each bullet must be a complete, informative statement
+- No filler words or generic phrases
+- Every word must earn its place
+- Prioritize clarity over cleverness
 
-**Usage:**
-```bash
-# Interactive mode
-python pdf_summarizer_unified_agent.py paper.pdf --pages 1-27
+**Information Hierarchy:**
+- Title: Clear, specific, captures the section essence
+- 3-6 bullet points per slide maximum
+- Each bullet addresses one key point
+- Order bullets logically (setup → findings → impact)
 
-# Specify provider
-python pdf_summarizer_unified_agent.py paper.pdf --provider openai --pages 1-27
-python pdf_summarizer_unified_agent.py paper.pdf --provider anthropic --model claude-opus-4-6 --pages 1-27
-```
+### B. Slide Structure Template
 
----
+#### Slide 1: The AND (Context)
+**Title:** [State the established knowledge or capability]
 
-### 5. Agent SDK Version (`pdf_summarizer_agent.py`)
-Uses Claude Agent SDK (Anthropic only).
+**Bullets:**
+- Current state of the field
+- Available tools and technologies
+- Established biological understanding
+- Relevant prior findings
 
-**Best for:**
-- Pure Anthropic workflows
-- When you only need Claude models
-- Built-in permission controls
+#### Slide 2: The BUT (Problem)
+**Title:** [Identify the critical gap or challenge]
 
-**Requirements:**
-- `pip install claude-agent-sdk`
-- `ANTHROPIC_API_KEY` environment variable
+**Bullets:**
+- Specific limitation of current approaches
+- Why this matters biologically/clinically
+- Consequences of unsolved problem
+- Need for new methodology
 
-**Usage:**
-```bash
-python pdf_summarizer_agent.py paper.pdf --pages 1-27 --output summary.txt
-```
+#### Slide 3-4: The THEREFORE (Method)
+**Title:** [The authors' innovative approach]
 
----
+**Bullets:**
+- Core methodological innovation (1-2 bullets)
+- Technical implementation details (1-2 bullets)
+- Dataset characteristics (1-2 bullets)
+- Validation approach (1 bullet)
 
-## Quick Start
+#### Slide 5-7: The THEREFORE (Results)
+**Title:** [Major finding or discovery]
 
-### Installation
+**Bullets:**
+- Primary result with quantification
+- Supporting evidence or validation
+- Biological interpretation
+- Connection to original problem
 
-```bash
-# Install system dependencies
-apt-get install poppler-utils
+#### Slide 8: Impact and Significance
+**Title:** [Broader implications]
 
-# Install Python packages (choose based on which version you want)
-pip install anthropic          # For Anthropic API version
-pip install openai             # For OpenAI version
-pip install claude-agent-sdk   # For Agent SDK version
-```
-
-### Set API Keys
-
-```bash
-# For Anthropic versions (API and Agent)
-export ANTHROPIC_API_KEY='your-anthropic-key'
-
-# For OpenAI version
-export OPENAI_API_KEY='your-openai-key'
-
-# Make permanent (add to ~/.bashrc or ~/.zshrc)
-echo 'export ANTHROPIC_API_KEY="your-key"' >> ~/.bashrc
-source ~/.bashrc
-```
+**Bullets:**
+- Answers to original question
+- Clinical or therapeutic relevance
+- Future research enabled
+- Field-advancing contribution
 
 ---
 
-## Common Parameters
+## Technical Content Guidelines
 
-All versions support these parameters:
+### Methodology Description
 
-| Parameter | Description | Example |
-|-----------|-------------|---------|
-| `pdf_path` | Path to PDF file (required) | `paper.pdf` |
-| `--pages` | Page range to summarize | `--pages 1-27` |
-| `--output` | Save to file instead of stdout | `--output summary.txt` |
-| `--model` | Model to use (OpenAI only) | `--model gpt-4-turbo` |
+**Be Specific and Rigorous:**
+- Name exact algorithms used (e.g., "NMF", "t-SNE with DBSCAN")
+- Specify data sources (e.g., "CCLE collection", "10x Genomics Chromium")
+- Include key parameters (e.g., "280 cells per line", "98% concordance")
+- Describe validation approaches explicitly
+
+**Mathematical Notation (Plain Text):**
+- Use plain text for formulas (no LaTeX)
+- Example: "Pearson correlation r > 0.8"
+- Example: "FDR-adjusted p < 0.05"
+- Example: "log2 fold change > 2"
+
+**Pipeline Description:**
+- Sequential steps clearly ordered
+- Input → Processing → Analysis → Output
+- Computational tools named specifically
+- Quality control thresholds stated
+
+
+---
+
+## Domain-Specific Adaptations
+
+**The framework adapts to your specific field. Examples:**
+
+### Metagenomics
+- AND: "Microbiome composition influences host health"
+- BUT: "Strain-level resolution remains challenging in complex communities"
+- THEREFORE: "We developed a reference-free k-mer approach for strain deconvolution"
+- Metrics: Precision/recall on mock communities, Shannon diversity, beta diversity
+
+### Proteomics
+- AND: "Post-translational modifications regulate protein function"
+- BUT: "Low-abundance PTMs are difficult to detect in complex samples"
+- THEREFORE: "We implemented targeted enrichment with quantitative MS"
+- Metrics: Dynamic range, CV of technical replicates, peptide coverage
+
+### Single-Cell Genomics
+- AND: "Single-cell profiling reveals cellular heterogeneity"
+- BUT: "Rare cell types and transient states are poorly captured"
+- THEREFORE: "We applied high-throughput droplet-based scRNA-seq at scale"
+- Metrics: Cells profiled, genes per cell, doublet rate, cluster resolution
+
+### Cancer Genomics
+- AND: "Driver mutations are well-characterized in primary tumors"
+- BUT: "Metastatic evolution and resistance mechanisms remain unclear"
+- THEREFORE: "We performed longitudinal multi-region sequencing across disease stages"
+- Metrics: Clonal evolution metrics, phylogenetic tree support, mutation timing
+
+**Key Principle:** Methods, visualizations, and validation metrics must be highly specific to the domain.
+
+---
+
+## Quality Control Checklist
+
+Before finalizing any presentation outline:
+
+**Narrative Structure:**
+- [ ] Clear AND-BUT-THEREFORE arc present?
+- [ ] Each section serves the narrative?
+- [ ] Logical flow from problem to solution?
+- [ ] Resolution satisfyingly addresses the conflict?
+
+**Scientific Rigor:**
+- [ ] Methods described with sufficient specificity?
+- [ ] Quantitative metrics included?
+- [ ] Validation approaches stated?
+- [ ] Results connected to biological interpretation?
+
+**Clarity and Concision:**
+- [ ] All bullets ≤ 8 words?
+- [ ] No jargon without context?
+- [ ] Each slide has single clear message?
+- [ ] Technical terms defined when introduced?
+
+**Impact:**
+- [ ] Broader significance stated?
+- [ ] Field-advancing contribution clear?
+- [ ] Future directions identified?
+- [ ] Take-home message obvious?
+
+---
+
+## Example Application: Cancer Cell Line Heterogeneity Study
+
+### AND (Slides 1-2):
+**Context:** Tumor heterogeneity drives treatment failure. scRNA-seq enables profiling of cellular diversity. Cell lines are experimental workhorses in cancer research.
+
+### BUT (Slide 3):
+**Conflict:** Unclear if cell lines recapitulate tumor heterogeneity patterns. Need systematic pan-cancer assessment of cellular plasticity in vitro.
+
+### THEREFORE (Slides 4-5):
+**Method:** Multiplexed scRNA-seq of 198 cancer cell lines. Dual SNP and expression-based assignment. 53,513 cells profiled from 22 cancer types.
+
+### THEREFORE (Slides 6-8):
+**Results:** Identified 12 recurrent heterogeneity programs. Programs mirror tumor patterns (cell cycle, EMT, stress). Cell lines preserve biologically relevant heterogeneity.
+
+### Impact (Slide 9):
+**Significance:** Validates cell lines as heterogeneity models. Enables mechanistic studies of plasticity. Identifies specific lines for follow-up research.
+
+---
+
+## Constraints and Rules
+
+**NEVER:**
+- Use generic filler statements ("important findings", "further research needed")
+- Exceed 8 words per bullet point
+- Omit quantitative validation metrics
+- Write methods without specific tool names
+
+**ALWAYS:**
+- Maintain ABT narrative structure throughout
+- Be domain-specific in methods and metrics
+- Connect findings back to original problem
+- Include statistical validation
+- Think like a senior computational biologist
 
 ---
 
 ## Output Format
 
-All versions provide structured output with:
+When creating presentation content, structure as:
 
-### a) Summary of Main Ideas
-- Paragraph-form summary
-- Key findings
-- Biological insights (for scientific papers)
-- Clinical relevance (if applicable)
+```markdown
+## Slide [N]: [Descriptive Title]
 
-### b) Methods Bullet Points
-- Detailed methodology breakdown
-- Technical approaches
-- Tools and technologies used
-- Analysis methods
+**Narrative Beat:** [AND/BUT/THEREFORE]
 
----
+**Bullets:**
+- [6-8 word statement]
+- [6-8 word statement]
+- [6-8 word statement]
 
-## Examples
-
-### Summarize entire PDF
-```bash
-python pdf_summarizer.py research_paper.pdf
-```
-
-### Summarize specific pages
-```bash
-python pdf_summarizer.py research_paper.pdf --pages 1-10
-```
-
-### Save to file
-```bash
-python pdf_summarizer.py research_paper.pdf --pages 1-27 --output summary.txt
-```
-
-### Use different model (OpenAI version)
-```bash
-python pdf_summarizer_openai.py paper.pdf --model gpt-3.5-turbo  # Cheaper, faster
-python pdf_summarizer_openai.py paper.pdf --model gpt-4          # Default
-python pdf_summarizer_openai.py paper.pdf --model gpt-4-turbo    # Faster GPT-4
-python pdf_summarizer_openai.py paper.pdf --model gpt-4o         # Latest model
+**Recommended Visual:** [Plot type with specific purpose]
 ```
 
 ---
 
-## Comparison
+## Summary
 
-| Feature | Unified Script | Unified Agent | Anthropic API | OpenAI API | Agent SDK |
-|---------|---------------|---------------|--------------|------------|-----------|
-| **Flexibility** | ⭐ Both providers | ⭐ Both providers | Anthropic only | OpenAI only | Anthropic only |
-| **Architecture** | Script | Agent | Script | Script | Agent |
-| **Quality** | Excellent | Excellent | Excellent | Excellent | Excellent |
-| **Speed** | Fast | Fast | Fast | Very Fast (GPT-4 Turbo) | Fast |
-| **Cost** | Variable | Variable | $5-25/1M tokens | $1-30/1M tokens | $5-25/1M tokens |
-| **Max Context** | 200K/128K | 200K/128K | 200K tokens | 128K tokens (GPT-4) | 200K tokens |
-| **Model Options** | All models | All models | Claude Opus 4.6 | GPT-4, GPT-4 Turbo, GPT-3.5 | Claude Opus 4.6 |
-| **Interactive** | ✓ Yes | ✓ Yes | No | No | No |
-| **Extensibility** | Code-based | Agent-based | Code-based | Code-based | Agent-based |
-| **Setup Complexity** | Simple | Simple | Simple | Simple | Simple |
+This framework ensures:
+1. **Compelling narrative** through ABT structure
+2. **Scientific rigor** through specific methods and validation
+3. **Clear communication** through concise bullets
+4. **Domain expertise** through field-specific adaptations
 
----
-
-## Cost Estimates
-
-For a typical 27-page scientific paper (~50,000 input tokens, ~2,000 output tokens):
-
-| Implementation | Model | Estimated Cost |
-|----------------|-------|----------------|
-| Unified | Claude Opus 4.6 | $0.25 - $0.30 |
-| Unified | GPT-4 | $1.50 - $2.00 |
-| Unified | GPT-4 Turbo | $0.50 - $0.75 |
-| Unified | GPT-3.5 Turbo | $0.05 - $0.10 |
-| Anthropic API | Claude Opus 4.6 | $0.25 - $0.30 |
-| OpenAI API | GPT-4 | $1.50 - $2.00 |
-| OpenAI API | GPT-4 Turbo | $0.50 - $0.75 |
-| OpenAI API | GPT-3.5 Turbo | $0.05 - $0.10 |
-| Agent SDK | Claude Opus 4.6 | $0.25 - $0.30 |
-
----
-
-## Troubleshooting
-
-### "pdftotext not found"
-```bash
-apt-get install poppler-utils
-```
-
-### "API key not set"
-```bash
-export ANTHROPIC_API_KEY='your-key'
-# or
-export OPENAI_API_KEY='your-key'
-```
-
-### "No text extracted from PDF"
-- PDF might be image-based (scanned) - needs OCR
-- Try opening the PDF manually to verify it contains text
-- Check if the page range is valid
-
-### "anthropic/openai package not installed"
-```bash
-pip install anthropic
-# or
-pip install openai
-```
-
-### Agent SDK: "Claude Code CLI not found"
-```bash
-pip install claude-agent-sdk
-```
-
----
-
-## Advanced Usage
-
-### Batch Processing Multiple PDFs
-
-```bash
-#!/bin/bash
-# Process all PDFs in a directory
-
-for pdf in data/input/*.pdf; do
-    echo "Processing: $pdf"
-    python pdf_summarizer.py "$pdf" --output "summaries/$(basename "$pdf" .pdf).txt"
-done
-```
-
-### Custom Prompts
-
-To modify the summarization prompt, edit the `prompt` variable in the respective Python file:
-
-```python
-# In pdf_summarizer.py, pdf_summarizer_openai.py, or pdf_summarizer_agent.py
-prompt = f"""Your custom prompt here...
-
-{text}
-"""
-```
-
-### Integration with Other Tools
-
-```python
-from pdf_summarizer_agent import summarize_pdf_with_agent
-import asyncio
-
-async def my_workflow():
-    summary = await summarize_pdf_with_agent(
-        "paper.pdf",
-        start_page=1,
-        end_page=27
-    )
-    # Process summary further
-    print(summary)
-
-asyncio.run(my_workflow())
-```
-
----
-
-## Contributing
-
-To add new features:
-
-1. **Add parameters** - Update `argparse` section
-2. **Modify prompt** - Edit the prompt template
-3. **Change output format** - Modify the output processing section
-4. **Add new model support** - Update model choices (OpenAI version)
-
----
-
-## License
-
-These tools are provided as-is for educational and research purposes.
-
----
-
----
-
-## 🆕 PowerPoint Generation Workflow
-
-### NEW: PDF to PPTX Pipeline
-
-Three new agents that work together to create PowerPoint presentations from PDFs:
-
-#### **1. Figure Linker Agent** (`figure_linker_agent.py`)
-Extracts figures from PDF and links them to summary points using AI.
-
-**Usage:**
-```bash
-python figure_linker_agent.py paper.pdf summary.txt --pages 1-27 --output mappings.json
-```
-
-#### **2. PPTX Generator Agent** (`pptx_generator_agent.py`)
-Creates editable PowerPoint with text and figures, smart image sizing.
-
-**Usage:**
-```bash
-python pptx_generator_agent.py mappings.json paper.pdf --output presentation.pptx
-```
-
-#### **3. Complete Workflow** (`pdf_to_pptx_workflow.py`) ⭐ RECOMMENDED
-Runs all steps automatically: Summarize → Link Figures → Generate PPTX
-
-**Usage:**
-```bash
-# One command does everything!
-python pdf_to_pptx_workflow.py paper.pdf --pages 1-27
-```
-
-**Features:**
-- Automatic figure extraction from PDF
-- AI-powered figure-summary linking
-- Smart image sizing (preserves aspect ratio)
-- Fully editable PowerPoint output
-- Works with both Anthropic and OpenAI
-
-**Requirements:**
-```bash
-pip install pymupdf python-pptx Pillow
-```
-
-**See `README_PPTX_WORKFLOW.md` for complete documentation.**
-
----
-
-## Support
-
-For issues or questions:
-- Check `README_PDF_SUMMARIZER.md` for PDF summarizer documentation
-- Check `README_PPTX_WORKFLOW.md` for PowerPoint generation documentation
-- Check `QUICK_START.md` for quick reference
-- Verify API keys are set correctly
-- Ensure all dependencies are installed
-- Check that the PDF contains extractable text and images
+The result: Presentation outlines that tell a clear, scientifically rigorous story that engages and persuades your audience.

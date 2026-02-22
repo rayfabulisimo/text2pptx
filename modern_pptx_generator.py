@@ -81,7 +81,7 @@ THEMES = {
 
 
 def add_background(slide, theme):
-    """Add background - either image or gradient."""
+    """Add background - either image or gradient with proper styling."""
     # Check if theme has background image
     if "background_image" in theme and theme["background_image"]:
         try:
@@ -89,11 +89,6 @@ def add_background(slide, theme):
             img_path = Path(theme["background_image"])
             if img_path.exists():
                 # Add background image
-                background = slide.background
-                fill = background.fill
-                fill.solid()
-                # Note: python-pptx doesn't directly support background images
-                # So we'll add it as a full-slide shape behind everything
                 left = Inches(0)
                 top = Inches(0)
                 height = Inches(7.5)
@@ -110,14 +105,16 @@ def add_background(slide, theme):
         except Exception as e:
             print(f"  Warning: Could not add background image: {e}")
 
-    # Default gradient background
+    # Rich gradient background
     background = slide.background
     fill = background.fill
     fill.gradient()
-    fill.gradient_angle = 45
+    fill.gradient_angle = 135  # Diagonal for more visual interest
 
-    # Two-color gradient
-    fill.gradient_stops[0].color.rgb = theme.get("background", RGBColor(245, 248, 250))
+    # Two-stop gradient with theme colors
+    bg_color = theme.get("background", RGBColor(245, 248, 250))
+
+    fill.gradient_stops[0].color.rgb = bg_color
     fill.gradient_stops[1].color.rgb = RGBColor(255, 255, 255)
 
 
@@ -153,8 +150,9 @@ def create_title_slide(prs, title, subtitle, theme):
     tf.word_wrap = True
     p = tf.paragraphs[0]
     p.text = title
-    p.font.size = Pt(44)
+    p.font.size = Pt(48)  # Larger, more impactful
     p.font.bold = True
+    p.font.name = "Calibri"
     p.font.color.rgb = RGBColor(255, 255, 255)
     p.alignment = PP_ALIGN.CENTER
 
@@ -166,7 +164,8 @@ def create_title_slide(prs, title, subtitle, theme):
     tf = subtitle_box.text_frame
     p = tf.paragraphs[0]
     p.text = subtitle
-    p.font.size = Pt(18)
+    p.font.size = Pt(20)  # Slightly larger
+    p.font.name = "Calibri"
     p.font.color.rgb = RGBColor(255, 255, 255)
     p.alignment = PP_ALIGN.CENTER
 
@@ -196,8 +195,9 @@ def create_content_slide(prs, title, content, image_data, theme):
     tf = title_box.text_frame
     p = tf.paragraphs[0]
     p.text = title
-    p.font.size = Pt(24)
+    p.font.size = Pt(28)  # Larger, more readable
     p.font.bold = True
+    p.font.name = "Calibri"  # Clean, professional font
     p.font.color.rgb = RGBColor(255, 255, 255)
 
     if image_data:
@@ -233,17 +233,19 @@ def create_content_slide(prs, title, content, image_data, theme):
         if line.startswith('- ') or line.startswith('• '):
             p.text = line[2:]
             p.level = 0
-            p.font.size = Pt(14)
+            p.font.size = Pt(16)  # Larger for better readability
         elif line.startswith('  - ') or line.startswith('  • '):
             p.text = line[4:]
             p.level = 1
-            p.font.size = Pt(12)
+            p.font.size = Pt(14)  # Sub-bullets slightly smaller
         else:
             p.text = line
-            p.font.size = Pt(14)
+            p.font.size = Pt(16)  # Larger body text
 
+        p.font.name = "Calibri"  # Professional, clean font
         p.font.color.rgb = theme["text"]
-        p.space_before = Pt(6)
+        p.space_before = Pt(8)  # More spacing
+        p.line_spacing = 1.2  # Better line spacing
 
     # Add image if provided
     if image_data:
@@ -252,28 +254,39 @@ def create_content_slide(prs, title, content, image_data, theme):
             img = Image.open(img_stream)
             orig_width, orig_height = img.size
 
-            # Calculate size to fit
-            max_width = img_width
-            max_height = 5.8
+            # More generous sizing - use full available space
+            max_width = img_width  # 4.5 inches available
+            max_height = 5.8  # Full height available
 
             aspect_ratio = orig_width / orig_height
+
+            # Start with max width, then adjust
             new_width = max_width
             new_height = new_width / aspect_ratio
 
+            # If too tall, scale down to fit height
             if new_height > max_height:
                 new_height = max_height
                 new_width = new_height * aspect_ratio
 
-            # Center image
-            img_top = 1.2 + (5.8 - new_height) / 2
+            # If still doesn't fit, ensure it does
+            if new_width > max_width:
+                new_width = max_width
+                new_height = new_width / aspect_ratio
+
+            # Center image vertically and horizontally in available space
+            img_top = 1.2 + (max_height - new_height) / 2
             actual_left = img_left + (img_width - new_width) / 2
 
             img_stream.seek(0)
-            slide.shapes.add_picture(
+            pic = slide.shapes.add_picture(
                 img_stream,
                 Inches(actual_left), Inches(img_top),
-                width=Inches(new_width)
+                width=Inches(new_width),
+                height=Inches(new_height)
             )
+
+            print(f"    Added image: {new_width:.2f}\" x {new_height:.2f}\" (original: {orig_width}x{orig_height}px)")
         except Exception as e:
             print(f"  Warning: Could not add image: {e}")
 

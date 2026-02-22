@@ -11,8 +11,20 @@
 		"apt": {
 			"packages": [
 				{
+					"name": "apt-transport-https",
+					"version": "2.4.14"
+				},
+				{
 					"name": "curl",
 					"version": "7.81.0-1ubuntu1.21"
+				},
+				{
+					"name": "nodejs",
+					"version": "20.20.0-1nodesource1"
+				},
+				{
+					"name": "poppler-utils",
+					"version": "22.02.0-2ubuntu0.12"
 				}
 			],
 			"install_software_properties_common": true

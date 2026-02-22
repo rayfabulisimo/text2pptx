@@ -1,0 +1,245 @@
+
+============================================================
+PAGE 1
+============================================================
+Articles
+https://doi.org/10.1038/s41588-020-00726-6
+1Department of Molecular Cell Biology, Weizmann Institute of Science, Rehovot, Israel. 2Institute of Bioscience, University of Sao Paulo, Sao Paulo, Brazil. 
+3Klarman Cell Observatory, Broad Institute of MIT and Harvard, Cambridge, MA, USA. 4Cancer Program, Broad Institute of MIT and Harvard, Cambridge, 
+MA, USA. 5Department of Otolaryngology–Head and Neck Surgery, The Ohio State University Wexner Medical Center, Columbus, OH, USA. 6The Nancy 
+& Stephen Grand Israel National Center for Personalized Medicine, Weizmann Institute of Science, Rehovot, Israel. 7Life Science Core Facility, Weizmann 
+Institute of Science, Rehovot, Israel. 8Department of Otolaryngology–Head and Neck Surgery, Washington University School of Medicine, St. Louis, MO, 
+USA. 9Present address: Genentech, South San Francisco, CA, USA. 10These authors contributed equally: Gabriela S. Kinker, Alissa C. Greenwald.  
+✉e-mail: itay.tirosh@weizmann.ac.il
+C
+ellular plasticity and heterogeneity are fundamental features 
+of human tumors that play a major role in disease progres-
+sion and treatment failure1,2. For example, rare subpopula-
+tions of tumor cells may be an underlying cause of resistance or may 
+facilitate metastasis. Single-cell RNA sequencing (scRNA-seq) has 
+emerged as a valuable tool to study intratumor heterogeneity (ITH) 
+directly in patient samples3–12. Yet the mechanisms and functional 
+implications of ITH patterns have been difficult to resolve, thus 
+calling for extensive follow-up studies in model systems. Genetic 
+diversity, epigenetic plasticity and interactions within the tumor 
+microenvironment all contribute to ITH. However, we hypoth-
+esize that a considerable fraction of ITH in expression patterns of 
+malignant cells reflects intrinsic cellular plasticity, which exists even 
+in the absence of a native microenvironment. To examine the het-
+erogeneity within cancer cell lines and their ability to recapitulate 
+ITH programs, we sought to define the landscape of cellular diver-
+sity within a large number of cell lines from the Cancer Cell Line 
+Encyclopedia (CCLE) collection13,14.
+Results
+Pan-cancer scRNA-seq of human cell lines. We developed and 
+applied a multiplexing strategy in which cells from different cell 
+lines were profiled in pools by scRNA-seq and then computationally 
+assigned to the corresponding cell line (Fig. 1a). We used existing 
+pools that were generated from the CCLE collection13,15. Each pool 
+consisted of 24–27 cell lines that were from diverse lineages but had 
+comparable proliferation rates and was profiled by scRNA-seq with 
+the 10x Genomics Chromium system, for an average of 280 cells 
+per cell line (Methods). We profiled eight CCLE pools, along with 
+one smaller custom pool that included head and neck squamous cell 
+carcinoma (HNSCC) cell lines.
+We assigned profiled cells to cell lines based on the consen-
+sus between two complementary approaches, which used genetic 
+and expression profiles (Fig. 1a). First, cells were clustered by their 
+global expression profiles, and each cluster was mapped to the cell 
+line with the most similar bulk RNA-seq profile14. Second, by detec-
+tion of SNPs in the scRNA-seq reads, we assigned cells to the cell 
+line with the highest similarity by SNP profiles derived from bulk 
+RNA-seq14,16. Cell line assignments based on gene expression and 
+SNPs were consistent for 98% of the cells, which were retained for 
+analysis (for example, Fig. 1b). The few inconsistent assignments 
+were observed primarily in cells with low data quality, resulting in 
+low SNP coverage, and were therefore excluded. Cell lines with fewer 
+than 50 assigned cells were also excluded from further analyses, as 
+were cells with low-quality data and suspected doublets. Overall, fol-
+lowing assignment and quality control filters, we studied the expres-
+sion profiles of 53,513 cells from 198 cell lines, reflecting 22 cancer 
+types (Fig. 1c and Supplementary Table 1). We detected an average of 
+19,264 unique molecular identifiers (UMIs) and 3,802 genes per cell, 
+underscoring the high quality of our dataset (Supplementary Fig. 1a).
+A potential caveat of our multiplexing approach is that in the pre-
+viously generated CCLE pools, but not in the custom HNSCC pool, 
+Pan-cancer single-cell RNA-seq identifies 
+recurring programs of cellular heterogeneity
+Gabriela S. Kinker1,2,10, Alissa C. Greenwald1,10, Rotem Tal1, Zhanna Orlova1, Michael S. Cuoco   3,  
+James M. McFarland   4, Allison Warren4, Christopher Rodman3, Jennifer A. Roth4, Samantha A. Bender4, 
+Bhavna Kumar5, James W. Rocco5, Pedro A. C. M. Fernandes2, Christopher C. Mader4, 
+Hadas Keren-Shaul6,7, Alexander Plotnikov6, Haim Barr6, Aviad Tsherniak   4, Orit Rozenblatt-Rosen3, 
+Valery Krizhanovsky1, Sidharth V. Puram8, Aviv Regev   3,9 and Itay Tirosh   1 ✉
+Cultured cell lines are the workhorse of cancer research, but the extent to which they recapitulate the heterogeneity observed 
+among malignant cells in tumors is unclear. Here we used multiplexed single-cell RNA-seq to profile 198 cancer cell lines from 22 
+cancer types. We identified 12 expression programs that are recurrently heterogeneous within multiple cancer cell lines. These 
+programs are associated with diverse biological processes, including cell cycle, senescence, stress and interferon responses, 
+epithelial–mesenchymal transition and protein metabolism. Most of these programs recapitulate those recently identified as 
+heterogeneous within human tumors. We prioritized specific cell lines as models of cellular heterogeneity and used them to 
+study subpopulations of senescence-related cells, demonstrating their dynamics, regulation and unique drug sensitivities, 
+which were predictive of clinical response. Our work describes the landscape of heterogeneity within diverse cancer cell lines 
+and identifies recurrent patterns of heterogeneity that are shared between tumors and specific cell lines.
+Nature Genetics | VOL 52 | November 2020 | 1208–1218 | www.nature.com/naturegenetics
+1208
+
+============================================================
+PAGE 2
+============================================================
+Articles
+NATuRE GEnETICS
+cell lines were co-cultured for 3 d before profiling by scRNA-seq, and 
+hence their expression patterns may have been affected. However, 
+our analyses suggest that the effect of co-culturing was limited, par-
+ticularly when considering the heterogeneity within each cell line, 
+which is the focus of this work. First, the patterns of heterogeneity 
+were as similar between cell lines from the same pool as they were 
+between cell lines from different pools (Supplementary Fig. 1b). 
+Second, we performed a control experiment in which six cell lines 
+were profiled with and without co-culturing for 3 d. Co-culturing 
+had a modest effect on the average gene expression in each cell line, 
+while patterns of heterogeneity within cell lines were highly consis-
+tent between the two conditions (Supplementary Fig. 1c–f).
+Patterns of expression heterogeneity within cell lines. Extensive 
+variability in gene expression was identified across cells within indi-
+vidual cell lines, including discrete subpopulations of cells, as well 
+as continuous patterns that reflect spectra of cellular states (Fig. 2a). 
+To identify discrete subpopulations, we used dimensionality reduc-
+tion with t-distributed stochastic neighbor embedding (t-SNE) fol-
+lowed by density-based clustering (DBSCAN; Extended Data Fig. 
+1a and Methods). Discrete clusters were found only within a minor-
+ity (11%) of the cell lines (Fig. 2b and Extended Data Fig. 1b,c), and 
+the expression programs of discrete clusters showed limited simi-
+larities between cell lines, indicating that discrete subpopulations 
+were typically cell line specific (Fig. 2c and Extended Data Fig. 1d).
+Next, to identify both continuous and discrete variability of cel-
+lular states, we applied non-negative matrix factorization (NMF) 
+to each cell line5 (for example, Fig. 2d and Methods). Overall, we 
+detected 1,445 robust expression programs across all cell lines, with 
+four to nine such programs in individual cell lines (Extended Data 
+Fig. 1e and Supplementary Table 3). To identify common expression 
+programs that varied within multiple cell lines, we first excluded 
+those with limited similarity to all other programs, as well as those 
+associated with technical confounders (Extended Data Fig. 1e,f). Of 
+the remaining 800 programs, only 4.75% corresponded to the dis-
+crete subpopulations described above (Fig. 2e).
+Comparison of the NMF programs, based on their shared genes, 
+emphasized clusters of similar programs, allowing us to define the 
+consensus of each cluster, which we termed recurrent heterogeneous 
+programs (RHPs) of gene expression, as they were heterogeneous 
+within multiple cell lines. As expected, the two most prominent 
+RHPs reflected the cell cycle (Fig. 2e and Supplementary Table 4). 
+The cell cycle RHPs corresponded to the G1/S and G2/M phases 
+(Fig. 2e), as was also observed in clinical tumor samples (Extended 
+Data Fig. 2a). G2/M programs were highly similar across cell lines 
+and tumors, defining a generic mitotic program (Extended Data 
+Fig. 2b). In contrast, G1/S programs associated with genome rep-
+lication were more context dependent. A central difference in G1/S 
+programs involved the MCM complex genes (MCM2–MCM7) and 
+the linker histone H1 family genes (HIST1H1B–HIST1H1E), which 
+were robustly upregulated in only tumors and cell lines, respec-
+tively (Extended Data Fig. 2b,d). This may reflect an adaptation 
+to rapid growth and loss of the G1 checkpoint in cell lines in vitro. 
+Consistent with this possibility, cell lines had a much lower percent-
+age of apparent G0 cells (that is, cells lacking both the G1/S and 
+G2/M expression programs; Extended Data Fig. 2e).
+RHPs mirror diverse biological processes and in  vivo states. 
+The ten additional RHPs reflected diverse biological processes 
+(Fig. 3 and Supplementary Table 4). These RHPs were either 
+–30
+0
+30
+–30
+0
+30
+60
+t-SNE1
+t-SNE2
+Cell line 1
+Cell line 2
+Cell line 24
+Cell line pool
+scRNA-seq
+(10x)
+t-SNE1
+t-SNE2
+Cell line
+assignments
+By SNP 
+t-SNE1
+t-SNE2
+By gene expr.
+Cell line
+mapping
+Consensus
+Bladder cancer
+Gastric cancer
+Kidney cancer
+Esophageal cancer
+Liver cancer
+Colorectal cancer
+Endometrial cancer
+Pancreatic cancer
+Brain cancer
+Ovarian cancer
+Breast cancer
+Skin cancer
+Head and neck cancer
+Others
+Lung cancer
+20%
+3%
+3%
+3%
+4%
+4%
+5%
+5%
+6%
+6%
+7%
+8%
+8%
+10%
+10%
+a
+b
+c
+NCIH1048
+NCIH1568
+NCIH1792
+NCIH1944
+NCIH2077
+NCIH2087
+NCIH358
+NCIH727
+Lung
+EFM192A
+HCC1419
+KPL1
+ZR751
+Breast
+PANC0203
+PK45H
+SW1990
+Pancreatic
+KYSE520
+TE6
+Esoph.
+CL34 (colon)
+MKN7 (gastric)
+KMRC3 (renal)
+SNU423 (head & neck)
+HS729
+RD
+Sarcoma
+HEC59 (endo.)
+Inconsistent
+assignment
+Cancer types: 22    Cell lines: 198    Cells: 53,513 
+Fig. 1 | Characterizing expression heterogeneity within cell lines by multiplexed scRNA-seq. a, Workflow of the multiplexing strategy used to profile 
+multiple cell lines simultaneously. Cell lines were pooled and profiled by droplet-based scRNA-seq. We used reference CCLE data to assign cells to the 
+most similar cell line based on their overall gene expression and SNP pattern. Expr., expression; endo., endometrial; esoph., eshophageal. b, t-SNE plot of a 
+representative pool demonstrating the robustness of cell line assignment. Cells with inconsistent assignments (by gene expression and SNPs) are denoted 
+and were excluded from further analyses. c, Distribution of the cancer types that were profiled.
+Nature Genetics | VOL 52 | November 2020 | 1208–1218 | www.nature.com/naturegenetics
+1209

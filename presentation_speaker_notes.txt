@@ -1,0 +1,156 @@
+PAN-CANCER SINGLE-CELL RNA-SEQ: RECURRING PROGRAMS OF CELLULAR HETEROGENEITY
+Speaker Notes and Presentation Text
+
+================================================================================
+SLIDE 1: TUMOR HETEROGENEITY DRIVES TREATMENT FAILURE
+================================================================================
+
+Good morning. Today I'll present our work on identifying recurring programs of cellular heterogeneity across cancer cell lines using single-cell RNA sequencing.
+
+Let me start with the context. Cellular plasticity and heterogeneity are fundamental features of human tumors that play a major role in disease progression and treatment failure. Rare subpopulations within tumors can drive both metastasis and therapeutic resistance.
+
+Single-cell RNA sequencing has emerged as a powerful tool that enables us to directly profile intratumor heterogeneity in patient samples. Multiple factors contribute to this heterogeneity: genetic diversity, epigenetic plasticity, and interactions within the tumor microenvironment all shape cellular states.
+
+However, despite these technological advances, the mechanisms driving heterogeneity and their functional implications remain poorly understood.
+
+================================================================================
+SLIDE 2: DO CELL LINES RECAPITULATE TUMOR HETEROGENEITY?
+================================================================================
+
+This brings us to the central question of our study: Do cancer cell lines recapitulate the heterogeneity patterns we observe in tumors?
+
+We hypothesized that a considerable fraction of tumor heterogeneity reflects intrinsic cellular plasticity—plasticity that may exist even in the absence of the native tumor microenvironment. However, cell lines grown in culture lack this native tumor context.
+
+Model systems are critically needed for mechanistic follow-up studies, but the extent of heterogeneity present in vitro remained unknown. The Cancer Cell Line Encyclopedia—or CCLE—collection provided us with a unique pan-cancer resource to systematically test this question at scale.
+
+================================================================================
+SLIDE 3: MULTIPLEXED SINGLE-CELL PROFILING OF 198 LINES
+================================================================================
+
+To address this, we developed and applied a multiplexed single-cell profiling strategy.
+
+We pooled 24 to 27 cell lines per batch and profiled them simultaneously using the 10x Genomics Chromium platform. To assign cells back to their source cell lines, we implemented a dual validation approach using both SNP-based genetic identification and expression-based clustering against bulk RNA-seq references.
+
+This dual method achieved 98% concordance, validating the accuracy of our assignments.
+
+In total, we profiled 53,513 cells from 198 cancer cell lines spanning 22 different cancer types. The data quality was excellent: we detected an average of 19,264 unique molecular identifiers and 3,802 genes per cell.
+
+Importantly, we validated that co-culture effects were minimal and did not substantially impact the heterogeneity patterns within individual cell lines.
+
+================================================================================
+SLIDE 4: TWO MODES OF EXPRESSION HETEROGENEITY
+================================================================================
+
+Our analysis revealed two distinct modes of expression heterogeneity within cell lines.
+
+First, we found discrete subpopulations in approximately 11% of the cell lines. However, continuous cellular state spectra were the more common pattern, suggesting that most heterogeneity reflects gradual transitions rather than fixed subclones.
+
+Using non-negative matrix factorization, we systematically identified 1,445 robust expression programs across all cell lines. Individual cell lines typically displayed between 4 and 9 such programs.
+
+This finding emphasizes that most cellular heterogeneity is continuous rather than discrete in nature.
+
+================================================================================
+SLIDE 5: TWELVE RECURRENT HETEROGENEOUS PROGRAMS IDENTIFIED
+================================================================================
+
+By clustering these programs based on shared gene signatures, we identified 12 recurrent heterogeneous programs—or RHPs—that appeared across multiple cell lines.
+
+These programs span diverse biological processes:
+
+Cell cycle programs corresponding to G1/S and G2/M phases were the most prominent. We also identified two distinct senescence programs: EpiSen, which retains epithelial markers, and PartialEMTSen, which shows partial mesenchymal transition.
+
+Stress response programs included heat shock and ER stress pathways. We detected interferon response pathway activation in subsets of cells.
+
+Epithelial-mesenchymal transition existed as a continuous spectrum rather than a binary state. Protein metabolism programs affecting ribosomal and translation machinery showed variability.
+
+Finally, metal response and hypoxia programs were present in specific cellular subpopulations.
+
+================================================================================
+SLIDE 6: CELL CYCLE PROGRAMS SHOW CONTEXT-DEPENDENCE
+================================================================================
+
+Examining the cell cycle programs in detail revealed interesting context-dependent differences.
+
+G2/M programs were virtually identical across cell lines and tumors, defining a generic mitotic program. However, G1/S programs differed between contexts.
+
+Specifically, MCM complex genes—involved in DNA replication licensing—were upregulated in tumors, while histone H1 family genes were preferentially upregulated in cell lines.
+
+This likely reflects adaptation to rapid in vitro growth and loss of the G1 checkpoint in cultured cells. Consistent with this, cell lines showed far fewer cells in the quiescent G0 state compared to tumors.
+
+================================================================================
+SLIDE 7: RHPS RECAPITULATE TUMOR HETEROGENEITY PATTERNS
+================================================================================
+
+Critically, we asked whether these cell line programs recapitulate heterogeneity patterns in actual tumors.
+
+We compared our RHPs to published tumor single-cell RNA-seq datasets and found strong correspondence. Gene signature correlations were high, with Pearson correlation coefficients exceeding 0.7 in most cases.
+
+We validated this across multiple tumor types: head and neck cancers, melanoma, and oligodendroglioma all showed matching programs. Cell cycle, EMT, and stress response programs were consistently shared.
+
+Importantly, senescence programs—which were initially surprising to observe in cell lines—were also present in tumors, validating their biological relevance.
+
+================================================================================
+SLIDE 8: SENESCENCE PROGRAMS SHOW DYNAMIC REGULATION
+================================================================================
+
+We investigated the senescence programs in greater depth and found they exhibit dynamic regulation.
+
+The senescent cell fraction increases with passage number in culture, as expected. TP53 mutations affect senescence program prevalence, with wild-type p53 lines showing higher senescence.
+
+We experimentally validated this by treating cells with Nutlin-3a, a p53 activator, which was sufficient to induce the senescence program.
+
+Importantly, these states are not terminal: EpiSen cells can transition to other cellular states, demonstrating plasticity within the senescence program itself.
+
+================================================================================
+SLIDE 9: SENESCENT CELLS DISPLAY UNIQUE DRUG SENSITIVITY
+================================================================================
+
+These findings have direct therapeutic relevance. Senescent cells displayed unique drug sensitivities.
+
+Specifically, senescent cells were sensitive to BCL family inhibitors. Navitoclax, a BCL-2/BCL-XL inhibitor, selectively targeted senescent cell populations.
+
+Drug response correlated quantitatively with senescence scores, and remarkably, senescence markers in our cell line data predicted clinical outcomes in patient datasets.
+
+This demonstrates that therapeutic targeting of specific cellular states is feasible and potentially clinically relevant.
+
+================================================================================
+SLIDE 10: CELL LINES PRIORITIZED AS HETEROGENEITY MODELS
+================================================================================
+
+To facilitate future research, we systematically quantified RHP prevalence across all 198 cell lines.
+
+This allowed us to match specific cell lines to individual RHP programs. For example, the lung cancer line A549 displays a prominent continuous EMT spectrum, making it an ideal model for studying EMT plasticity.
+
+We've created this as a resource for model system selection, enabling researchers to choose cell lines that best represent the heterogeneity program they wish to study.
+
+This prioritization enables targeted mechanistic follow-up studies in appropriate model systems.
+
+================================================================================
+SLIDE 11: CELL LINES VALIDATE AS PLASTICITY MODELS
+================================================================================
+
+So what are the broader implications of this work?
+
+First, we've demonstrated that intrinsic cellular plasticity exists independent of the tumor microenvironment. We've systematically identified 12 recurrent heterogeneous programs that are shared between tumors and cell lines.
+
+This means that cell lines do indeed preserve tumor-relevant heterogeneity patterns. This validation is critical: it confirms that in vitro models can be used to study the mechanisms driving cellular heterogeneity in cancer.
+
+================================================================================
+SLIDE 12: ENABLES MECHANISTIC AND THERAPEUTIC STUDIES
+================================================================================
+
+This has several important practical implications.
+
+Experimental manipulation of heterogeneity programs is now feasible in vitro using the prioritized cell line models we've identified. Drug sensitivity testing can be performed in heterogeneous cellular contexts that better reflect tumor biology.
+
+We've identified heterogeneity biomarkers derived from cell lines that predict clinical outcomes, suggesting these patterns are clinically relevant. Cellular state transitions are now recognized as therapeutically targetable vulnerabilities.
+
+The pan-cancer patterns we've identified reveal conserved plasticity biology across cancer types. And ultimately, this resource will accelerate mechanistic research into cancer heterogeneity, bridging the gap between tumor observations and experimental model systems.
+
+In summary: we've profiled 198 cancer cell lines at single-cell resolution, identified 12 recurrent heterogeneous programs that mirror tumor patterns, validated cell lines as models of cellular plasticity, and demonstrated therapeutic relevance through drug sensitivity studies. This resource now enables the broader cancer research community to perform targeted mechanistic studies of heterogeneity in appropriate model systems.
+
+Thank you for your attention. I'm happy to take questions.
+
+================================================================================
+END OF PRESENTATION
+================================================================================
